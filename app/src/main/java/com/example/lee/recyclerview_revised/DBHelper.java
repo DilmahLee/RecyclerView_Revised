@@ -1,4 +1,4 @@
-package com.example.lee.database;
+package com.example.lee.recyclerview_revised;
 
 import static android.provider.BaseColumns._ID; //資料庫都會有唯一的id
 import android.database.sqlite.SQLiteOpenHelper;
