@@ -1,17 +1,108 @@
 package com.example.lee.recyclerview_revised;
-
+import android.content.ContentValues;
+import android.database.sqlite.SQLiteDatabase;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.NumberPicker;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.Spinner;
+import android.widget.TextView;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
+import static com.example.lee.recyclerview_revised.DBHelper.Category;
+import static com.example.lee.recyclerview_revised.DBHelper.Frequency;
+import static com.example.lee.recyclerview_revised.DBHelper.RTNO;
+import static com.example.lee.recyclerview_revised.DBHelper.Ruletype;
 
 
 public class AddTask extends ActionBarActivity {
+
+    private DBHelper dbHelper = null;
+    private TextView taskname = null;
+    private NumberPicker weekpicker = null;
+    private NumberPicker daypicker = null;
+    private String[] tasktype = {"Health", "Work", "Trivial","Bad Habit"};
+    private Button cancelbutton = null;
+    private Button deletebutton = null;
+    private Button addbutton = null;
+    private RadioGroup radiogroup = null;
+    private RadioButton oxtype = null;
+    private RadioButton numtype = null;
+    private Spinner spinner;
+    private String spinnerselect;
+    int ox,intnum;
+    private int typecount;
+
+    Calendar c = Calendar.getInstance();
+    SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS");
+    String timestr = df.format(c.getTime());
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_task);
+        dbHelper = new DBHelper(this);
+        dbHelper.close();
+        taskname = (EditText)findViewById(R.id.editText);
+        cancelbutton = (Button)findViewById(R.id.button2);
+        deletebutton = (Button)findViewById(R.id.button3);
+        addbutton = (Button)findViewById(R.id.button4);
+        oxtype = (RadioButton)findViewById(R.id.oxradioButton);
+        numtype = (RadioButton)findViewById(R.id.intradioButton);
+        spinner = (Spinner)findViewById(R.id.spinner2);
+        weekpicker = (NumberPicker)findViewById(R.id.numberPicker);
+        weekpicker.setMinValue(0);
+        weekpicker.setMaxValue(7);
+        weekpicker.setValue(1);
+        daypicker = (NumberPicker)findViewById(R.id.numberPicker2);
+        daypicker.setMinValue(0);
+        daypicker.setMaxValue(10);
+        daypicker.setValue(1);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item,tasktype);
+
+
+
+        addbutton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                add(); //新增資料
+            }
+        });
+        spinner.setAdapter(adapter);
+        //設定項目被選取之後的動作
+        spinner.setOnItemSelectedListener(new Spinner.OnItemSelectedListener(){
+            public void onItemSelected(AdapterView adapterView, View view, int position, long id){
+                spinnerselect = spinner.getSelectedItem().toString();
+            }
+            public void onNothingSelected(AdapterView arg0) {
+
+            }
+        });
+        RadioGroup.OnCheckedChangeListener listener = new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch (checkedId) {
+                    case R.id.oxradioButton:
+                        ox = 1;
+                        intnum = 0;
+                        break;
+                    case R.id.intradioButton:
+                        ox = 0;
+                        intnum = 1;
+                        break;
+                }
+            }
+        };
     }
 
 
@@ -36,4 +127,50 @@ public class AddTask extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+    private void add(){
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        int intweek = weekpicker.getValue();
+        int intday = daypicker.getValue();
+        values.put("Name", taskname.getText().toString());
+        values.put("Times",intday);
+        values.put("StartDate",df.format(c.getTime()));
+        //values.put(Category, column2Text.getText().toString());
+        //values.put(Frequency, column3Text.getText().toString());
+
+        if(ox ==1 && intweek==1){
+            values.put(Ruletype, "RT1");
+        }
+        else if(intnum==1 && intweek==1){
+            values.put(Ruletype,"RT2");
+        }
+        else if(ox == 1 && intweek>1){
+            values.put(Ruletype,"RT3");
+        }
+        else if(intnum == 1 && intweek>1){
+            values.put(Ruletype,"RT4");
+        }
+        switch(spinnerselect){
+            case "Health":
+                typecount = 1;
+                break;
+            case "Work":
+                typecount = 2;
+                break;
+            case "Trivial":
+                typecount = 3;
+                break;
+            case "Bad Habit":
+                typecount = 4;
+                break;
+        }
+        values.put("TaskType", "RT1");
+
+
+
+
+
+        db.insert("Task", null, values);
+    }
+
 }
