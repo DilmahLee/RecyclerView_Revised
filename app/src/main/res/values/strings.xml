@@ -7,4 +7,18 @@
     <string name="action_share">Share</string>
     <string name="action_edit">Edit</string>
     <string name="title_activity_add_task">AddTask</string>
+
+    <string name="customize">Customize</string>
+    <string name="show_dialog">Show Dialog</string>
+    <string name="undo">Undo</string>
+
+    <string name="title_activity_main">DateTimePicker Example</string>
+    <string name="selected_time">The time you picked will be shown here.</string>
+    <string name="selected_date">The date you picked will be shown here.</string>
+    <string name="pick_time">Pick Time</string>
+    <string name="pick_date">Pick Date</string>
+    <string name="mode_24_hours">Use 24 hour mode</string>
+    <string name="mode_dark_time">Use dark theme</string>
+    <string name="mode_dark_date">Use dark theme</string>
+
 </resources>

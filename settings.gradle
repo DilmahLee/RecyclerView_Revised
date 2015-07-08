@@ -1,1 +1,1 @@
-include ':app', ':floatbuttonlibrary'
+include ':app', ':floatbuttonlibrary', ':caldroid', ':library'

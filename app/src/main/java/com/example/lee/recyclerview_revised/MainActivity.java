@@ -38,10 +38,13 @@ public class MainActivity extends ActionBarActivity {
     MyAdapter myAdapter;
     RecyclerView recyclerView;
     Toolbar toolbar;
+    ItemData itemData;
+    ArrayList<ItemData> Tasklist = new ArrayList<ItemData>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        BindData();
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("CircleLife");
         setSupportActionBar(toolbar);
@@ -50,21 +53,79 @@ public class MainActivity extends ActionBarActivity {
         //action button
         final View actionB = findViewById(R.id.action_b);
 
+
+        SwipeDismissRecyclerViewTouchListener touchListener =
+                new SwipeDismissRecyclerViewTouchListener(
+                        recyclerView,
+                        new SwipeDismissRecyclerViewTouchListener.DismissCallbacks() {
+                            @Override
+                            public boolean canDismiss(int position) {
+                                return true;
+                            }
+
+                            @Override
+                            public void onDismiss(RecyclerView recyclerView, int[] reverseSortedPositions) {
+                                for (int position : reverseSortedPositions) {
+                                    myAdapter.Carrylist.remove(position);
+                                }
+                                // do not call notifyItemRemoved for every item, it will cause gaps on deleting items
+                                myAdapter.notifyDataSetChanged();
+                            }
+                        });
+
+        recyclerView.setOnTouchListener(touchListener);
+        // Setting this scroll listener is required to ensure that during ListView scrolling,
+        // we don't look for swipes.
+        recyclerView.setOnScrollListener(touchListener.makeScrollListener());
+        recyclerView.addOnItemTouchListener(new RecyclerItemClickListener(recyclerView,
+                new OnItemRecycleViewClickListener() {
+                    @Override
+                    public void onItemClicked(View view, int position) {
+                       // Toast.makeText(MainActivity.this, "Clicked " + myAdapter.Carrylist.get(position).getTitle(), Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent();
+                        intent.setClass(MainActivity.this,CaldroidSampleActivity.class);
+                        startActivity(intent);
+                    }
+                }));
+
         FloatingActionButton actionC = new FloatingActionButton(getBaseContext());
-        actionC.setTitle("Hide/Show Action above");
+        actionC.setTitle("Numeric Record");
         actionC.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //actionB.setVisibility(actionB.getVisibility() == View.GONE ? View.VISIBLE : View.GONE);
+
+                itemData = new ItemData("Task", R.drawable.rating_good);
+                Tasklist.add(itemData);
+                BindData();
             }
         });
         ((FloatingActionsMenu) findViewById(R.id.multiple_actions)).addButton(actionC);
         actionB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(getApplicationContext(),"buttonB",Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(), "buttonB", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent();
+                intent.setClass(MainActivity.this,TaskPage.class);
+                startActivity(intent);
             }
         });
+
+
+    }
+    protected void BindData(){
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerView);
+        // cardView = (CardView) findViewById(R.id.recyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        // MyAdapter mAdapter = new MyAdapter(itemsData);
+        //myAdapter = new MyAdapter(Tasklist,this);
+        myAdapter = new MyAdapter(Tasklist);
+        recyclerView.setAdapter(myAdapter);
+
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+
+
 
     }
     //ToolBar Listener
@@ -95,7 +156,7 @@ public class MainActivity extends ActionBarActivity {
     public void onItemClicked(int position, MyAdapter mAdapter) {
         // TODO Auto-generated method stub
 
-        Toast.makeText(this, myAdapter.Carrylist.get(position).getTitle(), Toast.LENGTH_LONG).show();
+        //Toast.makeText(this, myAdapter.Carrylist.get(position).getTitle(), Toast.LENGTH_LONG).show();
 
     }
 

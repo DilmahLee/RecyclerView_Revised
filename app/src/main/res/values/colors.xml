@@ -10,4 +10,7 @@
     <color name="blue_semi_transparent">#805677fc</color>
     <color name="blue_semi_transparent_pressed">#80738ffe</color>
     <color name="Life_blue">#4876FF</color>>
+    <color name="green">#8FCC85</color>
+    <color name="blue">#ff33b5e5</color>
+
 </resources>
