@@ -79,9 +79,25 @@
                 android:id="@+id/action_b"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                fab:fab_colorNormal="@color/white"
-                fab:fab_title="Action with a very long name that won\'t fit on the screen"
+                fab:fab_colorNormal="@color/Bhabits_color"
+                fab:fab_title="Bad Habits"
                 fab:fab_colorPressed="@color/white_pressed"/>
+
+          <!--  <com.example.lee.floatbuttonlibrary.FloatingActionButton
+                android:id="@+id/action_d"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                fab:fab_colorNormal="@color/white"
+                fab:fab_title="Health"
+                fab:fab_colorPressed="@color/white_pressed"/>
+            <com.example.lee.floatbuttonlibrary.FloatingActionButton
+                android:id="@+id/action_e"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                fab:fab_colorNormal="@color/white"
+                fab:fab_title="Studying"
+                fab:fab_colorPressed="@color/white_pressed"/>
+                -->
 
         </com.example.lee.floatbuttonlibrary.FloatingActionsMenu>
 

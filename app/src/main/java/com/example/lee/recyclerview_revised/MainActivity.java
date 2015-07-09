@@ -49,10 +49,12 @@ public class MainActivity extends ActionBarActivity {
         toolbar.setTitle("CircleLife");
         setSupportActionBar(toolbar);
         toolbar.setOnMenuItemClickListener(onMenuItemClick);
-
+        toolbar.setBackgroundColor(getResources().getColor(R.color.trivial_color));
         //action button
         final View actionB = findViewById(R.id.action_b);
-
+       /* final View actionD = findViewById(R.id.action_d);
+        final View actionE = findViewById(R.id.action_e);
+*/
 
         SwipeDismissRecyclerViewTouchListener touchListener =
                 new SwipeDismissRecyclerViewTouchListener(
@@ -89,7 +91,19 @@ public class MainActivity extends ActionBarActivity {
                 }));
 
         FloatingActionButton actionC = new FloatingActionButton(getBaseContext());
-        actionC.setTitle("Numeric Record");
+        FloatingActionButton actionD = new FloatingActionButton(getBaseContext());
+        actionD.setTitle("Health");
+        actionD.setColorNormalResId(R.color.health_color);
+       // actionD.setColorPressedResId(R.color.pink_pressed);
+        //actionD.setIcon(R.drawable.health);
+        FloatingActionButton actionE = new FloatingActionButton(getBaseContext());
+        actionE.setTitle("Work");
+        actionE.setColorNormalResId(R.color.Work_color);
+        // actionD.setColorPressedResId(R.color.pink_pressed);
+        //actionD.setIcon(R.drawable.health);
+
+        actionC.setTitle("Trivial");
+        actionC.setColorNormalResId(R.color.trivial_color);
         actionC.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -100,8 +114,31 @@ public class MainActivity extends ActionBarActivity {
                 BindData();
             }
         });
+        //∑sºWButton®ÏButton Menu
         ((FloatingActionsMenu) findViewById(R.id.multiple_actions)).addButton(actionC);
+        ((FloatingActionsMenu) findViewById(R.id.multiple_actions)).addButton(actionD);
+        ((FloatingActionsMenu) findViewById(R.id.multiple_actions)).addButton(actionE);
         actionB.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Toast.makeText(getApplicationContext(), "buttonB", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent();
+                intent.setClass(MainActivity.this, TaskPage.class);
+                startActivity(intent);
+            }
+        });
+
+        actionD.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //Toast.makeText(getApplicationContext(), "buttonB", Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent();
+                intent.setClass(MainActivity.this,TaskPage.class);
+                intent.putExtra("primarycolor",R.color.health_color);
+                startActivity(intent);
+            }
+        });
+        actionE.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //Toast.makeText(getApplicationContext(), "buttonB", Toast.LENGTH_SHORT).show();
