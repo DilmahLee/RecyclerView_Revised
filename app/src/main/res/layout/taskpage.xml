@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="1"
+    tools:context="com.wdullaer.materialdatetimepicker.MainActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="69dp"
+        android:layout_gravity="center_horizontal">
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:background="?attr/colorPrimary"
+            android:minHeight="?attr/actionBarSize"
+            android:elevation="5dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+            app:theme="@style/ThemeOverlay.AppCompat.ActionBar"/>
+
+    </RelativeLayout>
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:id="@+id/editText2"
+        android:layout_gravity="center_horizontal"
+        android:hint="Enter Task name" />
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="350dp"
+    android:layout_gravity="center_horizontal"
+    >
+    <ImageView
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:id="@+id/imageView"
+        android:src="@drawable/time"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="From"
+        android:id="@+id/textView"
+        android:layout_toRightOf="@+id/imageView"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/imageView"/>
+    <TextView
+        android:layout_width="30dp"
+        android:layout_height="50dp"
+        android:text=""
+        android:id="@+id/blank1"
+        android:layout_toRightOf="@+id/imageView"
+        android:layout_below="@+id/textView"
+        android:layout_centerHorizontal="true"/>
+    <Button
+        android:id="@+id/date_button"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:text="@string/pick_date"
+        android:layout_below="@+id/textView"
+        android:layout_toRightOf="@+id/blank1"
+        android:textColor="@color/black_semi_transparent"/>
+    <TextView
+        android:layout_width="30dp"
+        android:layout_height="60dp"
+        android:text=""
+        android:id="@+id/blank2"
+        android:layout_toRightOf="@+id/date_button"
+        android:layout_centerHorizontal="true"/>
+    <Button
+        android:id="@+id/time_button"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:text="@string/pick_time"
+        android:layout_below="@+id/textView"
+        android:layout_toRightOf="@+id/blank2"
+        android:textColor="@color/black_semi_transparent"/>
+
+    <TextView
+        android:layout_width="30dp"
+        android:layout_height="20dp"
+        android:text="To"
+        android:id="@+id/text2"
+        android:layout_toRightOf="@+id/imageView"
+        android:layout_below="@+id/date_button"
+        android:layout_centerHorizontal="true"/>
+    <Button
+        android:id="@+id/Todate_button"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:text="@string/pick_date"
+        android:layout_below="@+id/text2"
+        android:layout_toRightOf="@+id/text2"
+        android:textColor="@color/black_semi_transparent"
+        />
+    <TextView
+        android:layout_width="30dp"
+        android:layout_height="60dp"
+        android:text=""
+        android:id="@+id/blank3"
+        android:layout_toRightOf="@+id/Todate_button"
+        android:layout_centerHorizontal="true"/>
+    <Button
+        android:id="@+id/Totime_button"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:text="@string/pick_time"
+        android:layout_below="@+id/text2"
+        android:layout_toRightOf="@+id/blank3"
+        android:textColor="@color/black_semi_transparent"
+        />
+    <Button
+        android:layout_width="fill_parent"
+        android:layout_height="50dp"
+        android:text="Frequency"
+        android:id="@+id/repeatbutton"
+
+        android:layout_toRightOf="@+id/imageView"
+        android:layout_below="@+id/Todate_button"
+        android:layout_centerHorizontal="true"
+        android:textColor="@color/black_semi_transparent"/>
+    <View
+        android:id="@+id/blockline1"
+        android:layout_width="fill_parent"
+        android:layout_height="1dp"
+        android:background="#808080"
+        android:layout_toRightOf="@+id/imageView"
+        android:layout_below="@+id/repeatbutton"
+        android:layout_marginTop="20dp"/>
+    <ImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:id="@+id/imageView2"
+        android:src="@drawable/note"
+        android:layout_marginTop="10dp"
+        android:layout_below="@+id/blockline1"
+        android:layout_alignParentLeft="true"
+        />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textMultiLine"
+        android:ems="10"
+        android:id="@+id/editText3"
+        android:layout_alignTop="@+id/blockline1"
+        android:layout_marginTop="10dp"
+        android:layout_toEndOf="@+id/textView"
+        android:hint="Add Notes" />
+   <!-- <ImageView
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:id="@+id/imageView3"
+        android:src="@drawable/color"
+        android:layout_below="@+id/imageView2"
+        android:layout_marginTop="10dp"
+        android:layout_alignParentLeft="true"
+        />
+
+    <Spinner
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/spinner"
+        android:layout_below="@+id/editText3"
+        android:layout_alignStart="@+id/Todate_button"
+        android:layout_alignParentStart="false"
+        android:visibility="visible" />
+-->
+
+
+</RelativeLayout>
+
+</LinearLayout>
