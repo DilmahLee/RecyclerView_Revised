@@ -44,12 +44,13 @@ public class MainActivity extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         BindData();
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setTitle("CircleLife");
         setSupportActionBar(toolbar);
         toolbar.setOnMenuItemClickListener(onMenuItemClick);
-        toolbar.setBackgroundColor(getResources().getColor(R.color.trivial_color));
+        //toolbar.setBackgroundColor(getResources().getColor(R.color.trivial_color));
         //action button
         final View actionB = findViewById(R.id.action_b);
        /* final View actionD = findViewById(R.id.action_d);
@@ -124,7 +125,10 @@ public class MainActivity extends ActionBarActivity {
                 //Toast.makeText(getApplicationContext(), "buttonB", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent();
                 intent.setClass(MainActivity.this, TaskPage.class);
+                intent.putExtra("primarycolor", R.color.Bhabits_color);
+                intent.putExtra("title","Bad Habits");
                 startActivity(intent);
+                MainActivity.this.finish();
             }
         });
 
@@ -134,8 +138,10 @@ public class MainActivity extends ActionBarActivity {
                 //Toast.makeText(getApplicationContext(), "buttonB", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent();
                 intent.setClass(MainActivity.this,TaskPage.class);
-                intent.putExtra("primarycolor",R.color.health_color);
+                intent.putExtra("primarycolor", R.color.health_color);
+                intent.putExtra("title","Health");
                 startActivity(intent);
+                MainActivity.this.finish();
             }
         });
         actionE.setOnClickListener(new View.OnClickListener() {
@@ -144,7 +150,10 @@ public class MainActivity extends ActionBarActivity {
                 //Toast.makeText(getApplicationContext(), "buttonB", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent();
                 intent.setClass(MainActivity.this,TaskPage.class);
+                intent.putExtra("primarycolor", R.color.Work_color);
+                intent.putExtra("title","Works");
                 startActivity(intent);
+                MainActivity.this.finish();
             }
         });
 
